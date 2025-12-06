@@ -28,7 +28,7 @@ def health_check():
     except Exception:
         # Wenn Redis nicht erreichbar ist, wird 503 zurückgegeben
         return "Service Unavailable", 503
-    
+ #Löscht die Besucheranzahl   
 @app.route('/reset')
 def reset():
     try:
@@ -37,7 +37,7 @@ def reset():
         return"Counter ist auf 0 zurückgesetzt.", 200
     except Exception:
         return "Zurücksetzten fehlgeschlagen.", 503    
-    
+#Zähhlt die Besucher Ip-adressen    
 @app.route('myvisits')
 def my_visits():
     try:
