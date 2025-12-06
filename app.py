@@ -37,6 +37,18 @@ def reset():
         return"Counter ist auf 0 zurückgesetzt.", 200
     except Exception:
         return "Zurücksetzten fehlgeschlagen.", 503    
+    
+@app.route('myvisits')
+def my_visits():
+    try:
+        redis_conn = get_redis_connection()
+        ip= request.remote_addr #Ipadresse des besuchers
+        key = f"visits:{ip}" #Eindeutiger schlüssel für Ip-Adressen
+        count = redis_conn.incr(key)
+        return f"Du hast die Seite {count} mal besucht.\n", 200
+    except Exception:
+        return "Fehler beim Abrufen der Besucherzahl", 503
+
 
 @app.route('/')
 def counter():
